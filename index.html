@@ -1,104 +1,136 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>День влюбленных</title>
+    <title>14 February</title>
     <style>
         /* Общие стили для страницы */
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            background-color: #ffe6e6;
-            background-image: url('https://www.transparenttextures.com/patterns/hearts.png');
-            background-size: cover;
-            padding: 0;
+            background: url('https://grizly.club/sec2/uploads/posts/2024-02/grizly-club-p-oboi-dlya-devochek-serdechki-41.jpg') repeat; /* Фон с сердечками */
+            overflow: hidden;
             margin: 0;
+            height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            position: relative;
         }
 
         /* Блок с анимированным посланием */
         .message-box {
             font-size: 32px;
             font-weight: bold;
-            color: #d147a3;
-            background: rgba(255, 255, 255, 0.8);
+            color: #ffffff;
+            background: #d477b0;
             padding: 20px;
             border-radius: 10px;
-            width: 90%;
-            max-width: 600px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
-            animation: fadeIn 1s ease-in-out;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
         }
 
-        /* Анимация появления текста */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.9); }
-            to { opacity: 1; transform: scale(1); }
-        }
-
-        /* Кнопка для смены послания */
+        /* Кнопка для запуска анимации */
         button {
             padding: 15px 25px;
-            font-size: 20px;
+            font-size: 24px; /* Увеличиваем размер шрифта */
+            font-weight: bold; /* Жирный текст кнопки */
             background: #ff4d79;
             color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
             transition: background 0.3s, transform 0.2s;
-            margin-top: 20px;
+            margin-top: 200px; /* Опускаем кнопку ниже */
+            text-transform: uppercase; /* Большие буквы */
         }
 
-        /* Анимация кнопки при нажатии */
         button:hover {
             background: #ff1a4d;
             transform: scale(1.05);
         }
+
+        /* Круг из приятных слов */
+        .word-circle {
+            position: absolute;
+            width: 200px; /* Размер круга */
+            height: 200px;
+            top: calc(50% - 150px); /* Располагаем круг над кнопкой */
+            animation: heartbeat 1.5s infinite, fadeCircle 3s infinite;
+        }
+
+        .word-circle span {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            font-size: 18px;
+            font-weight: bold;
+            color: white; /* Белый цвет текста */
+            white-space: nowrap;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Тень для объема */
+            transform-origin: 0 100px; /* Радиус круга */
+            transform: rotate(var(--angle)) translateY(-100px);
+        }
+
+        /* Адаптация под мобильные устройства */
+        @media (max-width: 768px) {
+            .message-box {
+                font-size: 24px;
+                padding: 15px;
+            }
+
+            button {
+                padding: 10px 20px;
+                font-size: 20px;
+                margin-top: 180px; /* Уменьшаем отступ для мобильных устройств */
+            }
+
+            .word-circle {
+                width: 150px;
+                height: 150px;
+                top: calc(50% - 120px);
+            }
+
+            .word-circle span {
+                font-size: 14px;
+                transform-origin: 0 75px; /* Уменьшаем радиус для мобильных устройств */
+                transform: rotate(var(--angle)) translateY(-75px);
+            }
+        }
     </style>
 </head>
 <body>
-
-    <!-- Заголовок страницы -->
-    <h1>💖 С Днем влюбленных! 💖</h1>
-    
     <!-- Блок с анимированным посланием -->
-    <div class="message-box" id="message">Алёна, ты - мое сердце! ❤️</div>
+    <div class="message-box" id="message"></div>
     
-    <!-- Кнопка для смены послания -->
-    <button onclick="nextMessage()">Следующее послание 💌</button>
+    <!-- Кнопка для запуска анимации -->
+    <button onclick="startMessageAnimation()">СТАРТ</button>
 
     <script>
-        // Список посланий для отображения
-        let messages = [
-            "Алёна, ты - мое сердце! ❤️",
-            "Алёна, люблю тебя больше всего на свете! 💕",
-            "Алёна, ты делаешь мой мир ярче! ✨",
-            "Каждый миг с тобой, Алёна, - это счастье! 😍",
-            "Алёна, ты - лучшее, что со мной случалось! 💖",
-            "Моя любовь к тебе, Алёна, бесконечна! 💘"
-        ];
+        let words = ["Алёна", "Ты", "Самая", "Прекрасная", "девушка", "которую", "Я", "Встречал", "За", "Всё", "Своё", "Время", "❤️"];
         let index = 0;
+        let messageBox = document.getElementById('message');
 
-        // Функция смены послания с анимацией
-        function nextMessage() {
-            let messageBox = document.getElementById('message');
-            messageBox.style.opacity = 0; // Плавное исчезновение
-            messageBox.style.transform = 'scale(0.9)';
-            setTimeout(() => {
-                index = (index + 1) % messages.length;
-                messageBox.innerText = messages[index];
-                messageBox.style.opacity = 1; // Плавное появление
-                messageBox.style.transform = 'scale(1)';
-            }, 500);
+
+        function startMessageAnimation() {
+            document.querySelector('button').style.display = 'none'; // Скрываем кнопку
+            showNextWord();
+        }
+
+        function showNextWord() {
+            if (index < words.length) {
+                messageBox.style.opacity = 0; // Исчезновение
+                setTimeout(() => {
+                    messageBox.innerText = words[index];
+                    messageBox.style.opacity = 1; // Плавное появление
+                    index++;
+                    setTimeout(showNextWord, 1000); // Задержка перед следующим словом
+                }, 500);
+            }
         }
     </script>
-
 </body>
 </html>

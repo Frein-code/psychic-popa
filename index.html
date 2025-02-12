@@ -1,13 +1,71 @@
-<!doctype html>
-<html lang="en" data-critters-container>
+<!DOCTYPE html>
+<html lang="ru">
 <head>
-  <meta charset="utf-8">
-  <title>Cookies</title>
-  <base href="/cookies/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-<style>*{margin:0;padding:0}@font-face{font-family:Steppe-Book;src:url(Steppe-Book.a7fc3ee738d3939e.ttf)}body{background-color:#5243f4;font-family:Steppe-Book,sans-serif;color:#fff}</style><link rel="stylesheet" href="styles.eed203796b0c98f0.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="styles.eed203796b0c98f0.css"></noscript></head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>День влюбленных</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #ffe6e6;
+            padding: 20px;
+        }
+        .message-box {
+            font-size: 24px;
+            font-weight: bold;
+            color: #d147a3;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px auto;
+            width: 80%;
+            max-width: 400px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: opacity 0.5s ease-in-out;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            background: #ff4d79;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button:hover {
+            background: #ff1a4d;
+        }
+    </style>
+</head>
 <body>
-  <app-root></app-root>
-<script src="runtime.f3610e95923c90ed.js" type="module"></script><script src="polyfills.f79f2a9fbeff8867.js" type="module"></script><script src="main.321492925cd245d5.js" type="module"></script></body>
+
+    <h1>💖 С Днем влюбленных! 💖</h1>
+    <div class="message-box" id="message">Ты - мое сердце! ❤️</div>
+    <button onclick="nextMessage()">Следующее послание 💌</button>
+
+    <script>
+        let messages = [
+            "Ты - мое сердце! ❤️",
+            "Люблю тебя больше всего на свете! 💕",
+            "Ты делаешь мой мир ярче! ✨",
+            "Каждый миг с тобой - это счастье! 😍",
+            "Ты - лучшее, что со мной случалось! 💖",
+            "Моя любовь к тебе бесконечна! 💘"
+        ];
+        let index = 0;
+
+        function nextMessage() {
+            let messageBox = document.getElementById('message');
+            messageBox.style.opacity = 0; // Плавное исчезновение
+            setTimeout(() => {
+                index = (index + 1) % messages.length;
+                messageBox.innerText = messages[index];
+                messageBox.style.opacity = 1; // Плавное появление
+            }, 500);
+        }
+    </script>
+
+</body>
 </html>

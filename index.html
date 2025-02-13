@@ -5,11 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>14 February</title>
     <style>
-        /* Общие стили для страницы */
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            background: url('https://grizly.club/sec2/uploads/posts/2024-02/grizly-club-p-oboi-dlya-devochek-serdechki-41.jpg') repeat; /* Фон с сердечками */
+            background: url('https://grizly.club/sec2/uploads/posts/2024-02/grizly-club-p-oboi-dlya-devochek-serdechki-41.jpg') repeat;
             overflow: hidden;
             margin: 0;
             height: 100vh;
@@ -20,32 +19,47 @@
             position: relative;
         }
 
-        /* Блок с анимированным посланием */
+        .valentine-greeting {
+            color: #f9f6f8;
+            font-size: 36px;
+            font-weight: 900;
+            text-shadow: 2px 2px 4px rgba(126, 190, 25, 0.6);
+            margin: -500px 0 20px 0;
+            position: relative;
+            z-index: 1;
+            animation: textGlow 2s ease-in-out infinite;
+            background: rgba(254, 127, 193, 0.887);
+            padding: 10px 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
         .message-box {
-            font-size: 32px;
+            font-size: 48px;
             font-weight: bold;
             color: #ffffff;
-            background: #d477b0;
-            padding: 20px;
-            border-radius: 10px;
+            background: #f17ac3f2;
+            padding: 30px 40px;
+            border-radius: 15px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             opacity: 0;
             transition: opacity 1s ease-in-out;
+            margin: 20px 0;
+            min-width: 300px;
         }
 
-        /* Кнопка для запуска анимации */
         button {
             padding: 15px 25px;
-            font-size: 24px; /* Увеличиваем размер шрифта */
-            font-weight: bold; /* Жирный текст кнопки */
+            font-size: 24px;
+            font-weight: bold;
             background: #ff4d79;
             color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
             transition: background 0.3s, transform 0.2s;
-            margin-top: 200px; /* Опускаем кнопку ниже */
-            text-transform: uppercase; /* Большие буквы */
+            margin-top: 100px;
+            text-transform: uppercase;
         }
 
         button:hover {
@@ -53,81 +67,57 @@
             transform: scale(1.05);
         }
 
-        /* Круг из приятных слов */
-        .word-circle {
-            position: absolute;
-            width: 200px; /* Размер круга */
-            height: 200px;
-            top: calc(50% - 150px); /* Располагаем круг над кнопкой */
-            animation: heartbeat 1.5s infinite, fadeCircle 3s infinite;
+        @keyframes textGlow {
+            0%, 100% { text-shadow: 0 0 10px #ff69b4, 0 0 20px #ff1493; }
+            50% { text-shadow: 0 0 20px #ff69b4, 0 0 30px #ff1493; }
         }
 
-        .word-circle span {
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            font-size: 18px;
-            font-weight: bold;
-            color: white; /* Белый цвет текста */
-            white-space: nowrap;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Тень для объема */
-            transform-origin: 0 100px; /* Радиус круга */
-            transform: rotate(var(--angle)) translateY(-100px);
-        }
-
-        /* Адаптация под мобильные устройства */
         @media (max-width: 768px) {
+            .valentine-greeting {
+                font-size: 28px;
+                margin: -450px 0 20px 0;
+                padding: 8px 20px;
+                border-radius: 10px;
+            }
+
             .message-box {
-                font-size: 24px;
-                padding: 15px;
+                font-size: 36px;
+                padding: 20px 30px;
+                min-width: 250px;
             }
 
             button {
                 padding: 10px 20px;
                 font-size: 20px;
-                margin-top: 180px; /* Уменьшаем отступ для мобильных устройств */
-            }
-
-            .word-circle {
-                width: 150px;
-                height: 150px;
-                top: calc(50% - 120px);
-            }
-
-            .word-circle span {
-                font-size: 14px;
-                transform-origin: 0 75px; /* Уменьшаем радиус для мобильных устройств */
-                transform: rotate(var(--angle)) translateY(-75px);
+                margin-top: 80px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Блок с анимированным посланием -->
     <div class="message-box" id="message"></div>
-    
-    <!-- Кнопка для запуска анимации -->
+    <div class="valentine-greeting">С 14 февраля, любимая &lt;3</div>
     <button onclick="startMessageAnimation()">СТАРТ</button>
 
     <script>
-        let words = ["Алёна", "Ты", "Самая", "Прекрасная", "девушка", "которую", "Я", "Встречал", "За", "Всё", "Своё", "Время", "❤️"];
+        let words = ["Алёна", "Ты", "Самая", "Прекрасная", "Девушка", "Которую", "Я", "Встречал", "За", "Всю", "Свою", "Жизнь", "Безумно", "Люблю", "Тебя", "❤️"];
         let index = 0;
         let messageBox = document.getElementById('message');
 
-
         function startMessageAnimation() {
-            document.querySelector('button').style.display = 'none'; // Скрываем кнопку
+            document.querySelector('button').style.display = 'none';
+            document.querySelector('.valentine-greeting').style.margin = "-250px 0 10px 0";
             showNextWord();
         }
 
         function showNextWord() {
             if (index < words.length) {
-                messageBox.style.opacity = 0; // Исчезновение
+                messageBox.style.opacity = 0;
                 setTimeout(() => {
                     messageBox.innerText = words[index];
-                    messageBox.style.opacity = 1; // Плавное появление
+                    messageBox.style.opacity = 1;
                     index++;
-                    setTimeout(showNextWord, 1000); // Задержка перед следующим словом
+                    setTimeout(showNextWord, 1000);
                 }, 500);
             }
         }
